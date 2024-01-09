@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      username: ashish
+      database: TwitClone
+      password: azure
+      port: '27017'
+      host: localhost

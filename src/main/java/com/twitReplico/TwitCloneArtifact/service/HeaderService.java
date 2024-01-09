@@ -1,5 +1,9 @@
 package com.twitReplico.TwitCloneArtifact.service;
 
-public interface HeaderService {
+import com.twitReplico.TwitCloneArtifact.entity.MianContent;
+
+public interface HeaderService{
+
+	String addPost(MianContent content);
 
 }
