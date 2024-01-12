@@ -1,4 +1,4 @@
-package com.twitReplico.TwitCloneArtifact.entity;
+package com.twitReplico.TwitCloneArtifact.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,17 +17,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document("MianContent")
-public class MianContent {
+public class MianContentDto {
 
-	@Id
-	@GeneratedValue
-	private  Long id;
 	
-	@Column
+	
 	private Long userId;
 	
-	@Column
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getPostMessage() {
+		return postMessage;
+	}
+
+	public void setPostMessage(String postMessage) {
+		this.postMessage = postMessage;
+	}
+
 	private String postMessage;
 	
 }
