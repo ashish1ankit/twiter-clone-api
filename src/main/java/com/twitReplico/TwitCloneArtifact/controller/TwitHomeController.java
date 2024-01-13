@@ -1,5 +1,7 @@
 package com.twitReplico.TwitCloneArtifact.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,23 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.twitReplico.TwitCloneArtifact.entity.MianContent;
-import com.twitReplico.TwitCloneArtifact.service.HeaderService;
+import com.twitReplico.TwitCloneArtifact.model.MianContentDto;
+import com.twitReplico.TwitCloneArtifact.service.TwitHomeService;
 
 @RequestMapping("twit-clone")
 @RestController
-public class HeadController {
+public class TwitHomeController {
 
 @Autowired
-private HeaderService headerService;
+private TwitHomeService homeService;
 	
-	@GetMapping("app-name")
-	public String fetchAppName() {
-		return "Twiter-CLone";
+	@GetMapping("get-All-post")
+	public List<MianContentDto> fetchAllPostDetails() {
+		List<MianContentDto> contents=homeService.fetchAllPostDetails();
+		return contents;
 	}
 	
 	@PostMapping("add-post")
-	public String insertPost(@RequestBody MianContent content ) {
-		headerService.addPost(content);
-		return "Added success";
+	public String postFeedContent(@RequestBody MianContentDto content ) {
+		String message=	homeService.postFeedContent(content);
+		return message;
 	}
 }
