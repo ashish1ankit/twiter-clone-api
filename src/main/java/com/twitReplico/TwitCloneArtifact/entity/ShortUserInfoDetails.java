@@ -17,7 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document("UserInfo")
+//@Document("UserInfo")
 public class ShortUserInfoDetails {
 
 	@Id
