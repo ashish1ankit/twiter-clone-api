@@ -17,8 +17,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document("MianContent")
-public class MianContent {
+@Document("UserInfo")
+public class ShortUserInfoDetails {
 
 	@Id
 	@GeneratedValue
@@ -26,10 +26,7 @@ public class MianContent {
 	
 	@Column
 	private Long userId;
-	
-	@Column
-	private String postMessage;
-	
+		
 	@Column
 	private String userHandle;
 	
