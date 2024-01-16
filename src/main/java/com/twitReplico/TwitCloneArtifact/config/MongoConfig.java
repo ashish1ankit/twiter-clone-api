@@ -24,6 +24,9 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
-        return new MongoTemplate(mongo(), "test");
+        return new MongoTemplate(mongo(), "TwitClone");
     }
+    
+    
+    
 }

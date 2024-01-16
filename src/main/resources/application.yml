@@ -1,8 +1,9 @@
 spring:
   data:
     mongodb:
-      username: ashish
+#      username: ashish
       database: TwitClone
-      password: azure
+#      password: azure
       port: '27017'
       host: localhost
+      uri: mongodb://localhost:27017/TwitClone

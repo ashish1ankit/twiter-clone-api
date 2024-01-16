@@ -17,12 +17,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document("MianContent")
+@Document("Users")
 public class MianContent {
 
 	@Id
 	@GeneratedValue
-	private  Long id;
+	private  String id;
 	
 	@Column
 	private Long userId;
