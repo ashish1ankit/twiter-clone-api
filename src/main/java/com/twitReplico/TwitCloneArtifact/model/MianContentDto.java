@@ -19,46 +19,15 @@ import lombok.Setter;
 @Builder
 public class MianContentDto {
 
-	
-	
-	private Long userId;
-	
-	public Long getUserId() {
-		return userId;
-	}
+	private String userId;
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+	private String userImgUrl;
 
-	public String getPostMessage() {
-		return postMessage;
-	}
 
-	public void setPostMessage(String postMessage) {
-		this.postMessage = postMessage;
-	}
-
-	private String postMessage;
-	
 	private String userName;
-	
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserHandle() {
-		return userHandle;
-	}
-
-	public void setUserHandle(String userHandle) {
-		this.userHandle = userHandle;
-	}
 
 	private String userHandle;
 	
+	private Boolean primeMarker;
+
 }

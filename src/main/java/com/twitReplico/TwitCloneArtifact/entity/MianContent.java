@@ -20,20 +20,19 @@ import lombok.Setter;
 @Document("Users")
 public class MianContent {
 
-	@Id
 	@GeneratedValue
-	private  String id;
-	
 	@Column
-	private Long userId;
-	
+	private String userId;
+
 	@Column
-	private String postMessage;
-	
+	private String userImgUrl;
+
 	@Column
 	private String userHandle;
-	
+
 	@Column
 	private String userName;
-	
+	@Column
+	private Boolean primeMarker;
+
 }

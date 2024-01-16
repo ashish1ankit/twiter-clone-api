@@ -7,3 +7,10 @@ spring:
       port: '27017'
       host: localhost
       uri: mongodb://localhost:27017/TwitClone
+      
+#  springfox:
+#    documentation:
+#      swagger:
+#        v2:
+#          path: /swagger.json
+

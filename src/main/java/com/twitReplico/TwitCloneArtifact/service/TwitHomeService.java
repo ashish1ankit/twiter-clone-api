@@ -12,9 +12,9 @@ public interface TwitHomeService{
 
 
 
-	List<MianContentDto> fetchAllPostDetails();
+	List<LargePostDetailsDto> fetchAllPostDetails();
 
-	String postFeedContent(List<MianContentDto> content);
+	String postFeedContent(List<LargePostDetailsDto> content);
 
 	List<ShortUserInfoDetailsDto> fetchAnyUserShortDetails(String unName);
 
@@ -29,5 +29,9 @@ public interface TwitHomeService{
 	List<LargePostDetailsDto> fetchAllRecomendedUserPosts(String userIdOwn);
 
 	Long fetchAllRecomendedUserPostsCount(String userIdOwn);
+
+	Boolean fetchUserPrimeStatus(String userId);
+
+	String postUserDetails(List<MianContentDto> content);
 
 }
