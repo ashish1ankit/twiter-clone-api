@@ -17,11 +17,13 @@ import org.springframework.stereotype.Service;
 
 import com.mongodb.client.MongoClient;
 import com.twitReplico.TwitCloneArtifact.entity.MianContent;
+import com.twitReplico.TwitCloneArtifact.entity.PostDetails;
 import com.twitReplico.TwitCloneArtifact.model.LargePostDetailsDto;
 import com.twitReplico.TwitCloneArtifact.model.MianContentDto;
 import com.twitReplico.TwitCloneArtifact.model.ShortUserInfoDetailsDto;
 import com.twitReplico.TwitCloneArtifact.model.ShortsNewDetailsDto;
-import com.twitReplico.TwitCloneArtifact.repository.TwitHomeRepository;
+import com.twitReplico.TwitCloneArtifact.repository.PostRepository;
+import com.twitReplico.TwitCloneArtifact.repository.UserRepository;
 import com.twitReplico.TwitCloneArtifact.service.TwitHomeService;
 
 @Service
@@ -34,30 +36,44 @@ public class TwitHomeServiceImpl implements TwitHomeService {
 	MongoTemplate mongoTemplate;
 
 	@Autowired
-	TwitHomeRepository twitHomeRepository;
+	UserRepository userRepository;
+	
+	@Autowired
+	PostRepository postRepository;
 
 	List<MianContentDto> list = new ArrayList<MianContentDto>();
 
 	@Override
-	public String postFeedContent(List<MianContentDto> content) {
-		// TODO Auto-generated method stub
-		List<MianContent> mianContent = new ArrayList<>();
-		for (MianContentDto contentDto : content) {
+	public String postFeedContent(List<LargePostDetailsDto> content) {
+		List<PostDetails> postDetails = new ArrayList<>();
+		for (LargePostDetailsDto contentDto : content) {
 			UUID uuid = UUID.randomUUID();
 
-			mianContent.add(MianContent.builder().id(uuid.toString()).postMessage(contentDto.getPostMessage())
-					.userHandle(contentDto.getUserHandle()).userId(contentDto.getUserId())
-					.userName(contentDto.getUserName()).build());
+			postDetails.add(PostDetails.builder().postId(uuid.toString()).postDesc(contentDto.getPostDesc())
+					.postImageUrlList(contentDto.getPostImageUrlList()).postTitle(contentDto.getPostTitle())
+					.postUserId(contentDto.getPostUserId()).postUserName(contentDto.getPostUserName()).build());
 		}
-		twitHomeRepository.saveAll(mianContent);
+		postRepository.saveAll(postDetails);
 		return "Content posted SUccessfully";
 
 	}
 
 	@Override
-	public List<MianContentDto> fetchAllPostDetails() {
-		// TODO Auto-generated method stub
-		return list;
+	public List<LargePostDetailsDto> fetchAllPostDetails() {
+		List<LargePostDetailsDto> postDetails = new ArrayList<>();
+		Query query = new Query();
+//		query.addCriteria(Criteria.where("userName").regex(unName, "i"));
+
+		List<PostDetails> finList = mongoTemplate.find(query, PostDetails.class, "Posts");
+		if (!finList.isEmpty()) {
+			for (PostDetails dto : finList) {
+				postDetails.add(LargePostDetailsDto.builder().postId(dto.toString()).postDesc(dto.getPostDesc())
+						.postImageUrlList(dto.getPostImageUrlList()).postTitle(dto.getPostTitle())
+						.postUserId(dto.getPostUserId()).postUserName(dto.getPostUserName()).build());
+			}
+
+		}
+		return postDetails;
 	}
 
 	@Override
@@ -111,6 +127,33 @@ public class TwitHomeServiceImpl implements TwitHomeService {
 	public Long fetchAllRecomendedUserPostsCount(String userIdOwn) {
 		// TODO Auto-generated method stub
 		return 1l;
+	}
+
+	@Override
+	public Boolean fetchUserPrimeStatus(String userId) {
+		Boolean status = false;
+		Query query = new Query();
+		query.addCriteria(Criteria.where("userName").is(userId).where("primeMarker").is(true));
+
+		List<MianContent> finList = mongoTemplate.find(query, MianContent.class, "Users");
+		if (!finList.isEmpty())
+			status = true;
+		return status;
+	}
+	
+	@Override
+	public String postUserDetails(List<MianContentDto> content) {
+		List<MianContent> mianContents = new ArrayList<>();
+		for (MianContentDto contentDto : content) {
+			UUID uuid = UUID.randomUUID();
+
+			mianContents.add(MianContent.builder().primeMarker(contentDto.getPrimeMarker())
+					.userHandle(contentDto.getUserHandle()).userId(contentDto.getUserId())
+					.userImgUrl(contentDto.getUserImgUrl()).userName(contentDto.getUserName()).build());
+		}
+		userRepository.saveAll(mianContents);
+		return "Content added Successfully";
+
 	}
 
 }

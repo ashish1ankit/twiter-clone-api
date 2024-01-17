@@ -31,13 +31,13 @@ private TwitHomeService homeService;
 MongoClient mongoClient;
 
 	@GetMapping("get-All-post")
-	public ResponseEntity<List<MianContentDto>> fetchAllPostDetails() {
-		List<MianContentDto> contents=homeService.fetchAllPostDetails();
-		return new ResponseEntity<List<MianContentDto>> (contents, HttpStatus.OK);
+	public ResponseEntity<List<LargePostDetailsDto>> fetchAllPostDetails() {
+		List<LargePostDetailsDto> contents=homeService.fetchAllPostDetails();
+		return new ResponseEntity<List<LargePostDetailsDto>> (contents, HttpStatus.OK);
 	}
 	
-	@PostMapping("add-post")
-	public ResponseEntity<String> postFeedContent(@RequestBody  List<MianContentDto> content ) {
+	@PostMapping("add-posts")
+	public ResponseEntity<String> postFeedContent(@RequestBody  List<LargePostDetailsDto> content ) {
 		String message=	homeService.postFeedContent(content);
 		return new ResponseEntity<String>(message, HttpStatus.OK)  ;
 	}
@@ -84,10 +84,15 @@ MongoClient mongoClient;
 		return new ResponseEntity<Long> (count, HttpStatus.OK);
 	}
 	
-//	@GetMapping("databse-name")
-//	public ResponseEntity<String> fetchDatabseName() {
-//		String name=mongoClient.get;
-//		return new ResponseEntity<String> (name, HttpStatus.OK);
-//	}
+	@GetMapping("prime-status")
+	public ResponseEntity<Boolean> fetchDatabseName(@RequestParam String userId) {
+		Boolean name=homeService.fetchUserPrimeStatus(userId);
+		return new ResponseEntity<Boolean> (name, HttpStatus.OK);
+	}
 	
+	@PostMapping("add-users")
+	public ResponseEntity<String> postUserDetails(@RequestBody List<MianContentDto> content) {
+		String message=	homeService.postUserDetails(content);
+		return new ResponseEntity<String>(message, HttpStatus.OK)  ;
+	}
 }

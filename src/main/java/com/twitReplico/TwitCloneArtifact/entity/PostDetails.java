@@ -1,6 +1,8 @@
-package com.twitReplico.TwitCloneArtifact.model;
+package com.twitReplico.TwitCloneArtifact.entity;
 
 import java.util.List;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +17,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LargePostDetailsDto {
+@Document("Posts")
+public class PostDetails {
 
 	private Long slId;
 
@@ -25,7 +28,7 @@ public class LargePostDetailsDto {
 	private String postUserName;
 
 	private Boolean postPrimeMarker;
-	
+
 	private String postUserImageUrl;
 
 	private String postTitle;
